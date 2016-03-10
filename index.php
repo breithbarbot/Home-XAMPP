@@ -87,8 +87,8 @@ if ($dossier = opendir($name_main_folder)) {
             <p>La version actuelle d'apache : <strong><?php echo apache_get_version(); ?></strong></p>
             <hr/>
             <div class="row">
-                <div class="col-sm-6"><a href="phpmyadmin/" class="box"> <img src="assets/img/phpmyadmin.png" alt="phpmyadmin"><h3>phpMyAdmin</h3></a></div>
-                <div class="col-sm-6"><a href="http://breithbarbot.name" target="_blank" class="box"><img src="/www/breithbarbot.name/.sources/picture.png" alt="breithbarbot.name"><h3>Breith Barbot</h3></a></div>
+                <div class="col-sm-6 col-sm-offset-3"><a href="phpmyadmin/" class="box"> <img src="assets/img/phpmyadmin.png" alt="phpmyadmin"><h3>phpMyAdmin</h3></a></div>
+                <!--<div class="col-sm-6"><a href="http://breithbarbot.name" target="_blank" class="box"><img src="/www/breithbarbot.name/.sources/picture.png" alt="breithbarbot.name"><h3>Breith Barbot</h3></a></div>-->
             </div>
             <hr/>
             <p>Il y a <strong><?php echo number_format($i); ?></strong> projet<?php echo ($i > 1) ? 's' : ''; ?></p>
