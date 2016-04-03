@@ -17,4 +17,7 @@ Usage Instructions
 Version
 ======
 
-Block viewing source code 0.9
+Home menu for XAMPP 1.0
+
+
+ - Copyright 2016 Breith Barbot | [Breithbarbot.name](http://breithbarbot.name/)
