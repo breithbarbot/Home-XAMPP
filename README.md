@@ -1,6 +1,8 @@
 # Project-manager XAMPP / Web
 Page d'accueil listant tout vos projets XAMPP / Web
 
+![Project-manager XAMPP / Web](.sources/Project-manager_XAMPP_Web.png "Project-manager XAMPP / Web")
+
 Ce projet utilise :
 * [Bootstrap](http://getbootstrap.com/)
 * [Modernizr](https://modernizr.com/)
