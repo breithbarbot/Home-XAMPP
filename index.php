@@ -9,96 +9,155 @@
  * \____/|_|  \___|_|\__|_| |_|_.__/ \__,_|_|  |_.__/ \___/ \__(_)_| |_|\__,_|_| |_| |_|\___|
  *
  *
- * /!\  Breithbarbot.name  /!\   |   Created by Breith Barbot   |   Tous droits réservés.
+ * /!\  Breithbarbot.name  /!\   |   Created by Breith Barbot   |   All rights reserved.
  *
  * ====================================================================================== -->
 <?php
-//affichage du phpinfo
+// Show phpinfo()
 if (isset($_GET['phpinfo'])) {
     phpinfo();
     exit();
 }
 
-// Variables globales
+// Globales variables
 $name_main_folder = "./www/";
-$files_exclude = array(
-    ".",
-    "..",
-    "index.php"
-);
+$files_exclude = [".", "..", "index.php"];
+$link_phpMyAdmin = "phpmyadmin/";
+$locale = "fr";
 
 $html = "";
+$i = 0;
+
+// Listing of files
 if ($dossier = opendir($name_main_folder)) {
-    $i = 0;
+    $html .= '<div class="row">';
     while (false !== ($fichier = readdir($dossier))) {
-        if (!in_array($fichier, $files_exclude) && is_dir($name_main_folder . $fichier)) {
-            $html .= (!($i % 3)) ? '<div class="row">' . PHP_EOL : '';
+        if (!in_array($fichier, $files_exclude) && is_dir($name_main_folder.$fichier)) {
 
-            $picture = (is_file($name_main_folder . $fichier . "/.sources/picture.png")) ? $name_main_folder . $fichier . "/.sources/picture.png" : "assets/img/creation.png";
+//            $html .= (!($i % 4)) ? '<div class="row">' : '';
 
-            if (is_file($name_main_folder . $fichier . "/.sources/config.ini")) {
-                $ini_array = parse_ini_file($name_main_folder . $fichier . "/.sources/config.ini", true);
+            $picture = (is_file($name_main_folder.$fichier."/.sources/picture.png")) ? $name_main_folder.$fichier."/.sources/picture.png" : "assets/img/default.png";
+            $urldev = $urlprod = $description = "";
+
+            if (is_file($name_main_folder.$fichier."/.sources/config.ini")) {
+                $ini_array = parse_ini_file($name_main_folder.$fichier."/.sources/config.ini", true);
                 $title = $ini_array['infos_base']['title'];
-                $url = (!empty($ini_array['infos_base']['URL'])) ? $ini_array['infos_base']['URL'] : $name_main_folder . $fichier;
-                $additional_URL = $ini_array['infos_base']['additional_URL'];
+                $urldev = (!empty($ini_array['infos_base']['URLDEV'])) ? $ini_array['infos_base']['URLDEV'] : $name_main_folder.$fichier;
+                if (!empty($ini_array['infos_base']['URLPROD'])) {
+                    $urlprod = $ini_array['infos_base']['URLPROD'];
+                }
+                if (!empty($ini_array['infos_base']['description'])) {
+                    $description = $ini_array['infos_base']['description'];
+                }
             } else {
-                $url = $name_main_folder . $fichier;
+                $urldev = $name_main_folder.$fichier;
                 $title = $fichier;
-                $additional_URL = "";
             }
 
-            $html .= '<div class="col-sm-4"><a href="' . $url . $additional_URL . '" class="box"> <img src="' . $picture . '" alt="' . $fichier . '"> <h3>' . $title . '</h3> </a></div>' . PHP_EOL;
+            $html .= '<div class="col-sm-3">';
+            $html .= '<div class="bb-project-manager" data-title="'.mb_strtolower($title, 'UTF-8').'">';
+            $html .= '<div class="bb-project-manager-content">';
+            $html .= '<div class="bb-project-manager-content-img">';
+            $html .= '<a href="'.$urldev.'" data-href="'.$urldev.'"><img src="'.$picture.'" alt="" class="img-responsive"></a>';
+            $html .= '</div>';
+            $html .= '<div class="bb-project-manager-content-btn">';
+            $html .= '<div class="bb-project-manager-content-alignCenter">';
+            $html .= '<div class="bb-project-manager-content-body">';
+            $html .= '<a href="'.$urldev.'" class="btn btn-sm btn-primary" rel="nofollow"><span class="glyphicon glyphicon-warning-sign text-danger" aria-hidden="true"></span> Development</a>';
+            if (!empty($urlprod)) {
+                $html .= '<a href="'.$urlprod.'" class="btn btn-sm btn-success" rel="nofollow"><span class="glyphicon glyphicon-thumbs-up text-success" aria-hidden="true"></span> Production</a>';
+            }
+            $html .= '</div>';
+            $html .= '</div>';
+            $html .= '</div>';
+            $html .= '</div>';
+            $html .= '<div class="bb-project-manager-info">';
+            $html .= '<div class="bb-project-manager-info-title">'.$title.'</div>';
+            if (!empty($description)) {
+                $html .= '<div class="bb-project-manager-info-desc">'.$description.'</div>';
+            }
+            $html .= '</div>';
+            $html .= '</div>';
+            $html .= '</div>';
 
-            $html .= (!(($i + 1) % 3)) ? '</div>' . PHP_EOL : '';
+//            $html .= (!(($i + 1) % 4)) ? '</div>' : '';
 
             $i++;
         }
     }
+    $html .= '</div>';
     closedir($dossier);
 } else {
-    $html .= '<h3 class="text-center">Le dossier principale n\'a pas pu être ouvert</h3>';
+    $html .= '<h3 class="text-center">The main folder could not be opened</h3>';
 }
 ?>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Breith Barbot - Accueil des projets</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="noindex, nofollow">
+<html lang="<?php echo $locale; ?>">
+    <head>
+        <meta charset="UTF-8">
+        <title>Breith Barbot - Home projects</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="robots" content="noindex, nofollow">
 
-    <link rel="icon" type="image/png" href="favicon.ico"/>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,300" rel="stylesheet" type="text/css">
-    <link href="assets/css/main.css" rel="stylesheet">
-</head>
+        <link rel="icon" type="image/png" href="favicon.ico"/>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,300" rel="stylesheet" type="text/css">
+        <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+        <link href="assets/css/main.css" rel="stylesheet">
+    </head>
 
-<body>
-<div class="container">
-    <div class="col-sm-12">
-        <header class="text-center">
-            <h1>
-                <span class="highlight">Page</span> d'accueil des projets
-                <small>(Breith Barbot)</small>
-            </h1>
-        </header>
-        <div class="text-center">
-            <hr/>
-            <p><a target="_blank" href="?phpinfo=1">phpinfo()</a></p>
-            <p>La version actuelle de <a title="Documentation PHP" target="_blank" href="https://php.net/manual/fr/">PHP</a> : <strong><?php echo phpversion(); ?></strong></p>
-            <p>La version actuelle d'apache : <strong><?php echo apache_get_version(); ?></strong></p>
-            <hr/>
-            <div class="row">
-                <div class="col-sm-6 col-sm-offset-3"><a href="phpmyadmin/" class="box"> <img src="assets/img/phpmyadmin.png" alt="phpmyadmin"><h3>phpMyAdmin</h3></a></div>
-                <!--<div class="col-sm-6"><a href="http://breithbarbot.name" target="_blank" class="box"><img src="/www/breithbarbot.name/.sources/picture.png" alt="breithbarbot.name"><h3>Breith Barbot</h3></a></div>-->
+    <body>
+        <div class="container">
+            <div class="col-sm-12">
+                <header class="text-center">
+                    <h1>
+                        <span class="highlight">Page</span> d'accueil des projets
+                    </h1>
+                </header>
+                <div>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-4">
+                            <ul>
+                                <li><img src="assets/img/favicon_php.ico" alt="phpinfo()" width="16" height="16"> <a target="_blank" href="?phpinfo">phpinfo()</a></li>
+                                <li><img src="assets/img/favicon_php.ico" alt="PHP" width="16" height="16"> <a title="Documentation PHP" target="_blank" href="https://php.net/manual/<?php echo $locale; ?>/">PHP</a> : <strong><?php echo phpversion(); ?></strong></li>
+
+                                <?php
+
+                                // NGINX
+                                /*if (!empty(shell_exec('nginx -v 2>&1'))) {
+                                    echo '<li><img src="assets/img/favicon_nginx.ico" alt="Nginx" width="16" height="16"> <a title="Documentation Nginx" target="_blank" href="http://nginx.org/en/docs/">Nginx</a> : <strong>'.str_replace('nginx version: ', '', shell_exec('nginx -v 2>&1')).'</strong></li>';
+                                }*/
+
+                                // APACHE
+                                /*if (!empty(shell_exec('apache2 -v'))) {
+                                    echo '<li><img src="assets/img/favicon_apache.ico" alt="Apache" width="16" height="16"> <a title="Documentation Apache" target="_blank" href="http://httpd.apache.org/docs/2.4/">Apache</a> : <strong>'.str_replace('Server version: ', '', shell_exec('apache2 -v 2>&1')).'</strong></li>';
+                                }*/
+
+                                // APACHE
+                                if (!empty(apache_get_version())) {
+                                    echo '<li><img src="assets/img/favicon_apache.ico" alt="Apache" width="16" height="16"> <a title="Documentation Apache" target="_blank" href="http://httpd.apache.org/docs/2.4/">Apache</a> : <strong>'.apache_get_version().'</strong></li>';
+                                }
+
+                                ?>
+
+                                <li><img src="assets/img/favicon_phpmyadmin.ico" alt="phpMyAdmin" width="16" height="16"> <a target="_blank" href="<?php echo $link_phpMyAdmin; ?>">phpMyAdmin</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-md-3 col-md-offset-9">
+                            <input title="Rechercher un projet par son titre" class="form-control" placeholder="Rechercher un projet..." id="search" type="search" autocomplete="off" autofocus>
+                        </div>
+                    </div>
+                    <p class="text-center" id="nbProjet">Il y a <strong><?php echo number_format($i); ?></strong> projet<?php echo ($i > 1) ? 's' : ''; ?></p>
+                    <br/>
+                    <?php echo $html; ?>
+                </div>
             </div>
-            <hr/>
-            <p>Il y a <strong><?php echo number_format($i); ?></strong> projet<?php echo ($i > 1) ? 's' : ''; ?></p>
-            <br/>
-            <?php echo $html; ?>
         </div>
-        <br/>
-    </div>
-</div>
-<script src="assets/js/jquery-2.1.1.min.js"></script>
-<script src="assets/js/smooth-scroll.js"></script>
-</body>
+        <script src="assets/js/jquery-3.1.1.slim.min.js"></script>
+        <script src="assets/js/smooth-scroll.js"></script>
+        <script src="assets/js/modernizr-custom.js"></script>
+        <script src="assets/js/main.js"></script>
+    </body>
 </html>
