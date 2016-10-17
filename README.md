@@ -17,7 +17,7 @@ Ce projet utilise :
 
 3. Un fichier de configuration `/www/YOUR_PROJECT/.sources/config.ini` peut être construit pour chaque projet (FACULTATIF).
 
-4. Pour ajouter une image à chaque projet, il faut créer une image (en 400px x 250px) et la placer dans le dossier `/www/YOUR_PROJECT/.sources/` et la nommer `picture.png` au format **.png** (FACULTATIF).
+4. Pour ajouter une image personnalisée à chaque projet, il faut créer une image (en 400px x 250px) et la placer dans le dossier `/www/YOUR_PROJECT/.sources/` et la nommer `picture.png` au format **.png** (FACULTATIF).
 
 5. Pour afficher les versions de vos serveurs web Nginx/Apache, il faut décommenter les lignes **127** & **132** du fichier index.php (FACULTATIF).
 
