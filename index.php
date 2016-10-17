@@ -41,14 +41,10 @@ if ($dossier = opendir($name_main_folder)) {
 
             if (is_file($name_main_folder.$fichier."/.sources/config.ini")) {
                 $ini_array = parse_ini_file($name_main_folder.$fichier."/.sources/config.ini", true);
-                $title = $ini_array['infos_base']['title'];
+                $title = (!empty($ini_array['infos_base']['title'])) ? $ini_array['infos_base']['title'] : $fichier;
                 $urldev = (!empty($ini_array['infos_base']['URLDEV'])) ? $ini_array['infos_base']['URLDEV'] : $name_main_folder.$fichier;
-                if (!empty($ini_array['infos_base']['URLPROD'])) {
-                    $urlprod = $ini_array['infos_base']['URLPROD'];
-                }
-                if (!empty($ini_array['infos_base']['description'])) {
-                    $description = $ini_array['infos_base']['description'];
-                }
+                $urlprod = (!empty($ini_array['infos_base']['URLPROD'])) ? $ini_array['infos_base']['URLPROD'] : "";
+                $description = (!empty($ini_array['infos_base']['description'])) ? $ini_array['infos_base']['description'] : "";
             } else {
                 $urldev = $name_main_folder.$fichier;
                 $title = $fichier;
