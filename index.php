@@ -60,9 +60,9 @@ if ($dossier = opendir($name_main_folder)) {
             $html .= '<div class="bb-project-manager-content-btn">';
             $html .= '<div class="bb-project-manager-content-alignCenter">';
             $html .= '<div class="bb-project-manager-content-body">';
-            $html .= '<a href="'.$urldev.'" class="btn btn-sm btn-primary" rel="nofollow" title="Developement"><span class="glyphicon glyphicon-alert text-danger" aria-hidden="true"></span> Dev</a>';
+            $html .= '<a href="'.$urldev.'" class="btn btn-sm btn-primary" rel="nofollow" title="Developement"><span class="glyphicon glyphicon-wrench text-danger" aria-hidden="true"></span> Dev</a>';
             if (!empty($urlprod)) {
-                $html .= '<a href="'.$urlprod.'" class="btn btn-sm btn-success" rel="nofollow" title="Production"><span class="glyphicon glyphicon-thumbs-up text-success" aria-hidden="true"></span> Prod</a>';
+                $html .= '<a href="'.$urlprod.'" class="btn btn-sm btn-success" rel="nofollow" title="Production"><span class="glyphicon glyphicon-globe text-success" aria-hidden="true"></span> Prod</a>';
             }
             if (!empty($urldb)) {
                 $html .= '<a href="'.$urldb.'" class="btn btn-sm btn-default" rel="nofollow" target="_blank" title="Database"><span class="glyphicon glyphicon-record" aria-hidden="true"></span> DB</a>';
