@@ -118,23 +118,18 @@ if ($dossier = opendir($name_main_folder)) {
                         <div class="col-md-8 col-md-offset-4">
                             <ul>
                                 <li><img src="assets/img/favicon_php.ico" alt="phpinfo()" width="16" height="16"> <a target="_blank" href="?phpinfo">phpinfo()</a></li>
-                                <li><img src="assets/img/favicon_php.ico" alt="PHP" width="16" height="16"> <a title="Documentation PHP" target="_blank" href="https://php.net/manual/<?php echo $locale; ?>/">PHP</a> : <strong><?php echo phpversion(); ?></strong></li>
+                                <li><img src="assets/img/favicon_php.ico" alt="PHP" width="16" height="16"> <a title="PHP documentation" target="_blank" href="https://php.net/manual/<?php echo $locale; ?>/">PHP</a> : <strong><?php echo phpversion(); ?></strong></li>
 
                                 <?php
 
                                 // NGINX
-                                /*if (!empty(shell_exec('nginx -v 2>&1'))) {
-                                    echo '<li><img src="assets/img/favicon_nginx.ico" alt="Nginx" width="16" height="16"> <a title="Documentation Nginx" target="_blank" href="http://nginx.org/en/docs/">Nginx</a> : <strong>'.str_replace('nginx version: ', '', shell_exec('nginx -v 2>&1')).'</strong></li>';
-                                }*/
+                                if (strpos($_SERVER['SERVER_SOFTWARE'], 'nginx/') !== false) {
+                                    echo '<li><img src="assets/img/favicon_nginx.ico" alt="Nginx" width="16" height="16"> <a title="NGINX Wiki’s documentation" target="_blank" href="https://www.nginx.com/resources/wiki/">Nginx</a> : <strong>'.$_SERVER['SERVER_SOFTWARE'].'</strong></li>';
+                                }
 
                                 // APACHE
-                                /*if (!empty(shell_exec('apache2 -v'))) {
-                                    echo '<li><img src="assets/img/favicon_apache.ico" alt="Apache" width="16" height="16"> <a title="Documentation Apache" target="_blank" href="http://httpd.apache.org/docs/2.4/">Apache</a> : <strong>'.str_replace('Server version: ', '', shell_exec('apache2 -v 2>&1')).'</strong></li>';
-                                }*/
-
-                                // APACHE
-                                if (!empty(apache_get_version())) {
-                                    echo '<li><img src="assets/img/favicon_apache.ico" alt="Apache" width="16" height="16"> <a title="Documentation Apache" target="_blank" href="http://httpd.apache.org/docs/2.4/">Apache</a> : <strong>'.apache_get_version().'</strong></li>';
+                                if (strpos($_SERVER['SERVER_SOFTWARE'], 'Apache/') !== false) {
+                                    echo '<li><img src="assets/img/favicon_apache.ico" alt="Apache" width="16" height="16"> <a title="Apache documentation" target="_blank" href="http://httpd.apache.org/docs/2.4/">Apache</a> : <strong>'.$_SERVER['SERVER_SOFTWARE'].'</strong></li>';
                                 }
 
                                 ?>
