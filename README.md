@@ -9,14 +9,17 @@ Ce projet utilise :
 * [jQuery](http://jquery.com/)
 * [Screen](https://github.com/microweber/screen/)
 
+<br>
 
 ## Usage Instructions
 
-- Placer toute la structure des fichiers/dossiers dans le répertoire `htdocs` (Remplacez-les si nécessaire).
+1. `composer install`
 
-2. Créer/Importer vos projets dans le dossier `/www`.
+2. Placer toute la structure des fichiers/dossiers dans le répertoire `htdocs` (Remplacez-les si nécessaire).
 
-3. Un fichier de configuration `/www/YOUR_PROJECT/.sources/config.ini` peut être construit pour chaque projet (FACULTATIF).
+3. Créer/Importer vos projets dans le dossier `/www`.
+
+4. Un fichier de configuration `/www/YOUR_PROJECT/.sources/config.ini` peut être construit pour chaque projet (FACULTATIF).
 
         ;Project     :  The project name
         ;Created on  :  YYYY/MM/DD
@@ -35,8 +38,9 @@ Ce projet utilise :
         
         thumbnail = "http://website.com/about"
 
-4. Pour ajouter une image personnalisée à chaque projet, il faut créer une image (en 400px x 250px) et la placer dans le dossier `/www/YOUR_PROJECT/.sources/` et la nommer `picture.png` au format **.png** (FACULTATIF).
+5. Pour ajouter une image personnalisée à chaque projet, il faut créer une image (en 400px x 250px) et la placer dans le dossier `/www/YOUR_PROJECT/.sources/` et la nommer `picture.png` au format **.png** (FACULTATIF).
 
+<br>
 
 ## Version
 
@@ -45,7 +49,8 @@ Project-manager XAMPP / Web 2.1
 - New features
 - Mobile compatibility / responsive
 - Thumbnail website
- 
+
+<br>
  
 ## License
 
