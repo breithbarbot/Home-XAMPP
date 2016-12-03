@@ -7,27 +7,44 @@ Ce projet utilise :
 * [Bootstrap](http://getbootstrap.com/)
 * [Modernizr](https://modernizr.com/)
 * [jQuery](http://jquery.com/)
+* [Screen](https://github.com/microweber/screen/)
 
 
 ## Usage Instructions
 
-1. Placer toute la structure des fichiers/dossiers dans le répertoire `htdocs` (Remplacez-les si nécessaire).
+- Placer toute la structure des fichiers/dossiers dans le répertoire `htdocs` (Remplacez-les si nécessaire).
 
 2. Créer/Importer vos projets dans le dossier `/www`.
 
 3. Un fichier de configuration `/www/YOUR_PROJECT/.sources/config.ini` peut être construit pour chaque projet (FACULTATIF).
 
-4. Pour ajouter une image personnalisée à chaque projet, il faut créer une image (en 400px x 250px) et la placer dans le dossier `/www/YOUR_PROJECT/.sources/` et la nommer `picture.png` au format **.png** (FACULTATIF).
+        ;Project     :  The project name
+        ;Created on  :  YYYY/MM/DD
+        ;Author      :  Author name
+        
+        [infos_base]
+        title = "The project name"
+        
+        description = "Project description..."
+        
+        URLDEV = "http://dev.website.com"
+        
+        URLPROD = "http://website.com"
+        
+        URLDB = "http://localhost/phpmyadmin/index.php?db=dbname"
+        
+        thumbnail = "http://website.com/about"
 
-5. Pour afficher les versions de vos serveurs web Nginx/Apache, il faut décommenter les lignes **127** & **132** du fichier index.php (FACULTATIF).
+4. Pour ajouter une image personnalisée à chaque projet, il faut créer une image (en 400px x 250px) et la placer dans le dossier `/www/YOUR_PROJECT/.sources/` et la nommer `picture.png` au format **.png** (FACULTATIF).
 
 
 ## Version
 
-Project-manager XAMPP / Web 2.0
+Project-manager XAMPP / Web 2.1
 - New design
 - New features
 - Mobile compatibility / responsive
+- Thumbnail website
  
  
 ## License

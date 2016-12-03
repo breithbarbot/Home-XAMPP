@@ -13,10 +13,30 @@
  *
  * ====================================================================================== -->
 <?php
+require_once 'vendor/autoload.php';
+
 // Show phpinfo()
 if (isset($_GET['phpinfo'])) {
     phpinfo();
     exit();
+}
+
+function generateThumbail($url, $fileLocation)
+{
+    $screenCapture = new \Screen\Capture($url);
+
+//    $screenCapture->setWidth(1920);
+//    $screenCapture->setHeight(1080);
+
+    $screenCapture->setClipWidth(400);
+    $screenCapture->setClipHeight(250);
+
+    $screenCapture->setBackgroundColor('#565659');
+    $screenCapture->setImageType('png');
+
+    $screenCapture->save($fileLocation);
+
+    return $screenCapture->getImageLocation();
 }
 
 // Globales variables
@@ -46,6 +66,14 @@ if ($dossier = opendir($name_main_folder)) {
                 $urlprod = (!empty($ini_array['infos_base']['URLPROD'])) ? $ini_array['infos_base']['URLPROD'] : "";
                 $urldb = (!empty($ini_array['infos_base']['URLDB'])) ? $ini_array['infos_base']['URLDB'] : "";
                 $description = (!empty($ini_array['infos_base']['description'])) ? $ini_array['infos_base']['description'] : "";
+                // Thumbnail
+                if (isset($ini_array['infos_base']['thumbnail']) && !is_file($name_main_folder.$fichier."/.sources/picture.png")) {
+                    if (!empty($ini_array['infos_base']['thumbnail']) && @get_headers($ini_array['infos_base']['thumbnail'], 1)) {
+                        $picture = generateThumbail($ini_array['infos_base']['thumbnail'], $name_main_folder.$fichier."/.sources/picture.png");
+                    } else {
+                        $picture = generateThumbail((!empty($urlprod) ? $urlprod : $urldev), $name_main_folder.$fichier."/.sources/picture.png");
+                    }
+                }
             } else {
                 $urldev = $name_main_folder.$fichier;
                 $title = $fichier;
@@ -55,7 +83,7 @@ if ($dossier = opendir($name_main_folder)) {
             $html .= '<div class="bb-project-manager" data-title="'.mb_strtolower($title, 'UTF-8').'">';
             $html .= '<div class="bb-project-manager-content">';
             $html .= '<div class="bb-project-manager-content-img">';
-            $html .= '<a href="'.$urldev.'" data-href="'.$urldev.'"><img src="'.$picture.'" alt="" class="img-responsive"></a>';
+            $html .= '<a href="'.$urldev.'" data-href="'.$urldev.'"><img src="'.$picture.'" alt="Thumbnail" class="img-responsive"></a>';
             $html .= '</div>';
             $html .= '<div class="bb-project-manager-content-btn">';
             $html .= '<div class="bb-project-manager-content-alignCenter">';
@@ -74,7 +102,8 @@ if ($dossier = opendir($name_main_folder)) {
             $html .= '<div class="bb-project-manager-info">';
             $html .= '<div class="bb-project-manager-info-title">'.$title.'</div>';
             if (!empty($description)) {
-                $html .= '<div class="bb-project-manager-info-desc">'.$description.'</div>';
+                $points = (strlen(trim($description)) > 39) ? '...' : '';
+                $html .= '<div class="bb-project-manager-info-desc" title="'.$description.'">'.substr(trim($description), 0, 39).$points.'</div>';
             }
             $html .= '</div>';
             $html .= '</div>';
@@ -121,7 +150,6 @@ if ($dossier = opendir($name_main_folder)) {
                                 <li><img src="assets/img/favicon_php.ico" alt="PHP" width="16" height="16"> <a title="PHP documentation" target="_blank" href="https://php.net/manual/<?php echo $locale; ?>/">PHP</a> : <strong><?php echo phpversion(); ?></strong></li>
 
                                 <?php
-
                                 // NGINX
                                 if (strpos($_SERVER['SERVER_SOFTWARE'], 'nginx/') !== false) {
                                     echo '<li><img src="assets/img/favicon_nginx.ico" alt="Nginx" width="16" height="16"> <a title="NGINX Wiki’s documentation" target="_blank" href="https://www.nginx.com/resources/wiki/">Nginx</a> : <strong>'.$_SERVER['SERVER_SOFTWARE'].'</strong></li>';
@@ -131,7 +159,6 @@ if ($dossier = opendir($name_main_folder)) {
                                 if (strpos($_SERVER['SERVER_SOFTWARE'], 'Apache/') !== false) {
                                     echo '<li><img src="assets/img/favicon_apache.ico" alt="Apache" width="16" height="16"> <a title="Apache documentation" target="_blank" href="http://httpd.apache.org/docs/2.4/">Apache</a> : <strong>'.$_SERVER['SERVER_SOFTWARE'].'</strong></li>';
                                 }
-
                                 ?>
 
                                 <li><img src="assets/img/favicon_phpmyadmin.ico" alt="phpMyAdmin" width="16" height="16"> <a target="_blank" href="<?php echo $link_phpMyAdmin; ?>">phpMyAdmin</a></li>

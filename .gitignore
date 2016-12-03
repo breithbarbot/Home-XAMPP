@@ -1,2 +1,4 @@
 .idea
-Project-manager-XAMPP-Web.iml
+*.iml
+composer.lock
+vendor/
