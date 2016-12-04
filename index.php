@@ -25,15 +25,10 @@ function generateThumbail($url, $fileLocation)
 {
     $screenCapture = new \Screen\Capture($url);
 
-//    $screenCapture->setWidth(1920);
-//    $screenCapture->setHeight(1080);
-
-    $screenCapture->setClipWidth(400);
-    $screenCapture->setClipHeight(250);
-
-    $screenCapture->setBackgroundColor('#565659');
-    $screenCapture->setImageType('png');
-
+    $screenCapture->setWidth(1920);
+    $screenCapture->setHeight(1200);
+    $screenCapture->setClipWidth(1920);
+    $screenCapture->setClipHeight(1200);
     $screenCapture->save($fileLocation);
 
     return $screenCapture->getImageLocation();
@@ -56,7 +51,7 @@ if ($dossier = opendir($name_main_folder)) {
 
 //            $html .= (!($i % 4)) ? '<div class="row">' : '';
 
-            $picture = (is_file($name_main_folder.$fichier."/.sources/picture.png")) ? $name_main_folder.$fichier."/.sources/picture.png" : "assets/img/default.png";
+            $picture = (is_file($name_main_folder.$fichier."/.sources/picture.jpg")) ? $name_main_folder.$fichier."/.sources/picture.jpg" : "assets/img/default.jpg";
             $urldev = $urlprod = $description = $urldb = "";
 
             if (is_file($name_main_folder.$fichier."/.sources/config.ini")) {
@@ -67,11 +62,11 @@ if ($dossier = opendir($name_main_folder)) {
                 $urldb = (!empty($ini_array['infos_base']['URLDB'])) ? $ini_array['infos_base']['URLDB'] : "";
                 $description = (!empty($ini_array['infos_base']['description'])) ? $ini_array['infos_base']['description'] : "";
                 // Thumbnail
-                if (isset($ini_array['infos_base']['thumbnail']) && !is_file($name_main_folder.$fichier."/.sources/picture.png")) {
+                if (isset($ini_array['infos_base']['thumbnail']) && !is_file($name_main_folder.$fichier."/.sources/picture.jpg")) {
                     if (!empty($ini_array['infos_base']['thumbnail']) && @get_headers($ini_array['infos_base']['thumbnail'], 1)) {
-                        $picture = generateThumbail($ini_array['infos_base']['thumbnail'], $name_main_folder.$fichier."/.sources/picture.png");
+                        $picture = generateThumbail($ini_array['infos_base']['thumbnail'], $name_main_folder.$fichier."/.sources/picture.jpg");
                     } else {
-                        $picture = generateThumbail((!empty($urlprod) ? $urlprod : $urldev), $name_main_folder.$fichier."/.sources/picture.png");
+                        $picture = generateThumbail((!empty($urlprod) ? $urlprod : $urldev), $name_main_folder.$fichier."/.sources/picture.jpg");
                     }
                 }
             } else {
@@ -103,7 +98,7 @@ if ($dossier = opendir($name_main_folder)) {
             $html .= '<div class="bb-project-manager-info-title">'.$title.'</div>';
             if (!empty($description)) {
                 $points = (strlen(trim($description)) > 39) ? '...' : '';
-                $html .= '<div class="bb-project-manager-info-desc" title="'.$description.'">'.substr(trim($description), 0, 39).$points.'</div>';
+                $html .= '<div class="bb-project-manager-info-desc" title="'.$description.'">'.trim(substr($description, 0, 39)).$points.'</div>';
             }
             $html .= '</div>';
             $html .= '</div>';
