@@ -21,24 +21,24 @@ Ce projet utilise :
 
 4. Un fichier de configuration `/www/YOUR_PROJECT/.sources/config.ini` peut être construit pour chaque projet (FACULTATIF).
 
+```ini
+;Project     :  The project name
+;Created at  :  YYYY/MM/DD
+;Author      :  Author name
 
-        ;Project     :  The project name
-        ;Created at  :  YYYY/MM/DD
-        ;Author      :  Author name
+[infos_base]
+title = "The project name"
 
-        [infos_base]
-        title = "The project name"
+description = "Project description..."
 
-        description = "Project description..."
+URLDEV = "http://dev.website.com"
 
-        URLDEV = "http://dev.website.com"
+URLPROD = "http://website.com"
 
-        URLPROD = "http://website.com"
+URLDB = "http://localhost/phpmyadmin/index.php?db=dbname"
 
-        URLDB = "http://localhost/phpmyadmin/index.php?db=dbname"
-
-        thumbnail = "http://website.com/about"
-
+thumbnail = "http://website.com/about"
+```
 
 5. Pour ajouter une image personnalisée à chaque projet, il faut créer une image (en 400px x 250px) et la placer dans le dossier `/www/YOUR_PROJECT/.sources/` et la nommer `picture.jpg` au format **.jpg** (FACULTATIF).
 
