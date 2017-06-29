@@ -98,8 +98,10 @@ if ($dossier = opendir($name_main_folder)) {
             $html .= '<div class="bb-project-manager-info">';
             $html .= '<div class="bb-project-manager-info-title">'.$title.'</div>';
             if (!empty($description)) {
-                $points = (strlen(trim($description)) > 35) ? '...' : '';
+                $points = (strlen(trim($description)) > 39) ? '...' : '';
                 $html .= '<div class="bb-project-manager-info-desc" title="'.$description.'">'.trim(mb_substr($description, 0, 39, 'UTF-8')).$points.'</div>';
+            } else {
+                $html .= '<div class="bb-project-manager-info-desc" title="">&nbsp;</div>';
             }
             $html .= '</div>';
             $html .= '</div>';
