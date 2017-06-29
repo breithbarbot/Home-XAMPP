@@ -53,15 +53,15 @@ if ($dossier = opendir($name_main_folder)) {
 //            $html .= (!($i % 4)) ? '<div class="row">' : '';
 
             $picture = is_file($name_main_folder.$fichier.'/.sources/picture.jpg') ? $name_main_folder.$fichier.'/.sources/picture.jpg' : 'assets/img/default.jpg';
-            $urldev = $urlprod = $description = $urldb = "";
+            $urldev = $urlprod = $description = $urldb = '';
 
             if (is_file($name_main_folder.$fichier.'/.sources/config.ini')) {
                 $ini_array = parse_ini_file($name_main_folder.$fichier.'/.sources/config.ini', true);
                 $title = (!empty($ini_array['infos_base']['title'])) ? $ini_array['infos_base']['title'] : $fichier;
                 $urldev = (!empty($ini_array['infos_base']['URLDEV'])) ? $ini_array['infos_base']['URLDEV'] : $name_main_folder.$fichier;
-                $urlprod = (!empty($ini_array['infos_base']['URLPROD'])) ? $ini_array['infos_base']['URLPROD'] : "";
-                $urldb = (!empty($ini_array['infos_base']['URLDB'])) ? $ini_array['infos_base']['URLDB'] : "";
-                $description = (!empty($ini_array['infos_base']['description'])) ? $ini_array['infos_base']['description'] : "";
+                $urlprod = (!empty($ini_array['infos_base']['URLPROD'])) ? $ini_array['infos_base']['URLPROD'] : '';
+                $urldb = (!empty($ini_array['infos_base']['URLDB'])) ? $ini_array['infos_base']['URLDB'] : '';
+                $description = (!empty($ini_array['infos_base']['description'])) ? $ini_array['infos_base']['description'] : '';
                 // Thumbnail
                 if (isset($ini_array['infos_base']['thumbnail']) && !is_file($name_main_folder.$fichier.'/.sources/picture.jpg')) {
                     if (!empty($ini_array['infos_base']['thumbnail']) && @get_headers($ini_array['infos_base']['thumbnail'], 1)) {
