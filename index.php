@@ -13,6 +13,7 @@
  *
  * ====================================================================================== -->
 <?php
+// Include composer
 require_once 'vendor/autoload.php';
 
 // Show phpinfo()
@@ -35,38 +36,38 @@ function generateThumbail($url, $fileLocation)
 }
 
 // Globales variables
-$name_main_folder = "./www/";
-$files_exclude = [".", "..", "index.php"];
-$link_phpMyAdmin = "phpmyadmin/";
-$locale = "fr";
+$name_main_folder = './www/';
+$files_exclude = ['.', '..', 'index.php'];
+$link_phpMyAdmin = 'phpmyadmin/';
+$locale = 'fr';
 
-$html = "";
+$html = '';
 $i = 0;
 
 // Listing of files
 if ($dossier = opendir($name_main_folder)) {
     $html .= '<div class="row">';
     while (false !== ($fichier = readdir($dossier))) {
-        if (!in_array($fichier, $files_exclude) && is_dir($name_main_folder.$fichier)) {
+        if (!in_array($fichier, $files_exclude, true) && is_dir($name_main_folder.$fichier)) {
 
 //            $html .= (!($i % 4)) ? '<div class="row">' : '';
 
-            $picture = (is_file($name_main_folder.$fichier."/.sources/picture.jpg")) ? $name_main_folder.$fichier."/.sources/picture.jpg" : "assets/img/default.jpg";
+            $picture = is_file($name_main_folder.$fichier.'/.sources/picture.jpg') ? $name_main_folder.$fichier.'/.sources/picture.jpg' : 'assets/img/default.jpg';
             $urldev = $urlprod = $description = $urldb = "";
 
-            if (is_file($name_main_folder.$fichier."/.sources/config.ini")) {
-                $ini_array = parse_ini_file($name_main_folder.$fichier."/.sources/config.ini", true);
+            if (is_file($name_main_folder.$fichier.'/.sources/config.ini')) {
+                $ini_array = parse_ini_file($name_main_folder.$fichier.'/.sources/config.ini', true);
                 $title = (!empty($ini_array['infos_base']['title'])) ? $ini_array['infos_base']['title'] : $fichier;
                 $urldev = (!empty($ini_array['infos_base']['URLDEV'])) ? $ini_array['infos_base']['URLDEV'] : $name_main_folder.$fichier;
                 $urlprod = (!empty($ini_array['infos_base']['URLPROD'])) ? $ini_array['infos_base']['URLPROD'] : "";
                 $urldb = (!empty($ini_array['infos_base']['URLDB'])) ? $ini_array['infos_base']['URLDB'] : "";
                 $description = (!empty($ini_array['infos_base']['description'])) ? $ini_array['infos_base']['description'] : "";
                 // Thumbnail
-                if (isset($ini_array['infos_base']['thumbnail']) && !is_file($name_main_folder.$fichier."/.sources/picture.jpg")) {
+                if (isset($ini_array['infos_base']['thumbnail']) && !is_file($name_main_folder.$fichier.'/.sources/picture.jpg')) {
                     if (!empty($ini_array['infos_base']['thumbnail']) && @get_headers($ini_array['infos_base']['thumbnail'], 1)) {
-                        $picture = generateThumbail($ini_array['infos_base']['thumbnail'], $name_main_folder.$fichier."/.sources/picture.jpg");
+                        $picture = generateThumbail($ini_array['infos_base']['thumbnail'], $name_main_folder.$fichier.'/.sources/picture.jpg');
                     } else {
-                        $picture = generateThumbail((!empty($urlprod) ? $urlprod : $urldev), $name_main_folder.$fichier."/.sources/picture.jpg");
+                        $picture = generateThumbail((!empty($urlprod) ? $urlprod : $urldev), $name_main_folder.$fichier.'/.sources/picture.jpg');
                     }
                 }
             } else {
@@ -142,7 +143,7 @@ if ($dossier = opendir($name_main_folder)) {
                         <div class="col-md-8 col-md-offset-4">
                             <ul>
                                 <li><img src="assets/img/favicon_php.ico" alt="phpinfo()" width="16" height="16"> <a target="_blank" href="?phpinfo">phpinfo()</a></li>
-                                <li><img src="assets/img/favicon_php.ico" alt="PHP" width="16" height="16"> <a title="PHP documentation" target="_blank" href="https://php.net/manual/<?php echo $locale; ?>/">PHP</a> : <strong><?php echo phpversion(); ?></strong></li>
+                                <li><img src="assets/img/favicon_php.ico" alt="PHP" width="16" height="16"> <a title="PHP documentation" target="_blank" href="https://php.net/manual/<?php echo $locale; ?>/">PHP</a> : <strong><?php echo PHP_VERSION; ?></strong></li>
 
                                 <?php
                                 // NGINX
