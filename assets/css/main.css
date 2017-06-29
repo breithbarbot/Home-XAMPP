@@ -29,11 +29,11 @@ header {
 }
 
 .highlight, a {
-    color: #17abff;
+    color: #17ABFF;
 }
 
 a:hover {
-    color: #17abff;
+    color: #17ABFF;
 }
 
 ul {
@@ -111,6 +111,10 @@ ul {
 .bb-project-manager-info-desc {
     color: #888;
     font-size: 13px;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 #search {
