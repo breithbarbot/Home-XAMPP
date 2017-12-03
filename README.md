@@ -19,9 +19,9 @@ Ce projet utilise :
 
 2. Placer toute la structure des fichiers/dossiers dans le répertoire `htdocs` (Remplacez-les si nécessaire).
 
-3. Créer/Importer vos projets dans le dossier `/www`.
+3. Créer/Importer vos projets dans le dossier `/projects`.
 
-4. Un fichier de configuration `/www/YOUR_PROJECT/.sources/config.ini` peut être construit pour chaque projet (FACULTATIF).
+4. Un fichier de configuration `/projects/YOUR_PROJECT/.sources/config.ini` peut être construit pour chaque projet (FACULTATIF).
 
 ```ini
 ;Project     :  The project name
@@ -42,7 +42,7 @@ URLDB = "http://localhost/phpmyadmin/index.php?db=dbname"
 thumbnail = "http://website.com/about"
 ```
 
-5. Pour ajouter une image personnalisée à chaque projet, il faut créer une image (en 400px x 250px) et la placer dans le dossier `/www/YOUR_PROJECT/.sources/` et la nommer `picture.jpg` au format **.jpg** (FACULTATIF).
+5. Pour ajouter une image personnalisée à chaque projet, il faut créer une image (en 400px x 250px) et la placer dans le dossier `/projects/YOUR_PROJECT/.sources/` et la nommer `picture.jpg` au format **.jpg** (FACULTATIF).
 
 <br>
 

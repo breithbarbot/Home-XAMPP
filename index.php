@@ -36,7 +36,7 @@ function generateThumbail($url, $fileLocation)
 }
 
 // Globales variables
-$name_main_folder = './www/';
+$name_main_folder = './projects/';
 $files_exclude = ['.', '..', 'index.php'];
 $link_phpMyAdmin = 'phpmyadmin/';
 $locale = 'fr';
@@ -146,6 +146,7 @@ if ($dossier = opendir($name_main_folder)) {
                             <ul>
                                 <li><img src="assets/img/favicon_php.ico" alt="phpinfo()" width="16" height="16"> <a target="_blank" href="?phpinfo">phpinfo()</a></li>
                                 <li><img src="assets/img/favicon_php.ico" alt="PHP" width="16" height="16"> <a title="PHP documentation" target="_blank" href="https://php.net/manual/<?php echo $locale; ?>/">PHP</a> : <strong><?php echo PHP_VERSION; ?></strong></li>
+                                <li><img src="assets/img/favicon_mysql.ico" alt="MySQL" width="16" height="16"> <a title="MySQL documentation" target="_blank" href="https://dev.mysql.com/doc/<?php echo $locale; ?>/">MySQL</a> : <strong><?php echo exec('mysql -V'); ?></strong></li>
 
                                 <?php
                                 // NGINX
