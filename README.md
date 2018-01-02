@@ -1,5 +1,5 @@
 # Web projects homepage
-> Web projects homepage for XAMMP and more...
+> Web projects homepage for XAMPP and more...
 
 <br>
 
