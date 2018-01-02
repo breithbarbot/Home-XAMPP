@@ -13,7 +13,10 @@
 # Assets managed by yarn #
 ##########################
 node_modules/
+.sass-cache/
 /yarn.lock
+/yarn-error.log
+/npm-debug.log
 
 
 # OS generated files #
@@ -31,3 +34,7 @@ Thumbs.db
 ##############
 /.idea/
 /*.iml
+
+
+# Custom #
+##########

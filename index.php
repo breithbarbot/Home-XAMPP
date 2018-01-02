@@ -13,7 +13,7 @@
  *
  * ====================================================================================== -->
 <?php
-// Include composer
+// Include autoload composer
 require_once 'vendor/autoload.php';
 
 // Show phpinfo()
@@ -36,10 +36,10 @@ function generateThumbail($url, $fileLocation)
 }
 
 // Globales variables
-$name_main_folder = './www/';
+$name_main_folder = './projects/';
 $files_exclude = ['.', '..', 'index.php'];
-$link_phpMyAdmin = 'phpmyadmin/';
-$locale = 'fr';
+$link_phpMyAdmin = '/phpmyadmin';
+$locale = 'en';
 
 $html = '';
 $i = 0;
@@ -53,25 +53,24 @@ if ($dossier = opendir($name_main_folder)) {
 //            $html .= (!($i % 4)) ? '<div class="row">' : '';
 
             $picture = is_file($name_main_folder.$fichier.'/.sources/picture.jpg') ? $name_main_folder.$fichier.'/.sources/picture.jpg' : 'assets/img/default.jpg';
-            $urldev = $urlprod = $description = $urldb = '';
+            $url_app = $description = $url_db = '';
 
             if (is_file($name_main_folder.$fichier.'/.sources/config.ini')) {
                 $ini_array = parse_ini_file($name_main_folder.$fichier.'/.sources/config.ini', true);
-                $title = (!empty($ini_array['infos_base']['title'])) ? $ini_array['infos_base']['title'] : $fichier;
-                $urldev = (!empty($ini_array['infos_base']['URLDEV'])) ? $ini_array['infos_base']['URLDEV'] : $name_main_folder.$fichier;
-                $urlprod = (!empty($ini_array['infos_base']['URLPROD'])) ? $ini_array['infos_base']['URLPROD'] : '';
-                $urldb = (!empty($ini_array['infos_base']['URLDB'])) ? $ini_array['infos_base']['URLDB'] : '';
-                $description = (!empty($ini_array['infos_base']['description'])) ? $ini_array['infos_base']['description'] : '';
+                $title = !empty($ini_array['infos_base']['TITLE']) ? $ini_array['infos_base']['TITLE'] : $fichier;
+                $description = !empty($ini_array['infos_base']['DESCRIPTION']) ? $ini_array['infos_base']['DESCRIPTION'] : '';
+                $url_app = !empty($ini_array['infos_base']['URL_APP']) ? $ini_array['infos_base']['URL_APP'] : $name_main_folder.$fichier;
+                $url_db = !empty($ini_array['infos_base']['URL_DB']) ? $ini_array['infos_base']['URL_DB'] : '';
                 // Thumbnail
                 if (isset($ini_array['infos_base']['thumbnail']) && !is_file($name_main_folder.$fichier.'/.sources/picture.jpg')) {
                     if (!empty($ini_array['infos_base']['thumbnail']) && @get_headers($ini_array['infos_base']['thumbnail'], 1)) {
                         $picture = generateThumbail($ini_array['infos_base']['thumbnail'], $name_main_folder.$fichier.'/.sources/picture.jpg');
                     } else {
-                        $picture = generateThumbail((!empty($urlprod) ? $urlprod : $urldev), $name_main_folder.$fichier.'/.sources/picture.jpg');
+                        $picture = generateThumbail($url_app, $name_main_folder.$fichier.'/.sources/picture.jpg');
                     }
                 }
             } else {
-                $urldev = $name_main_folder.$fichier;
+                $url_app = $name_main_folder.$fichier;
                 $title = $fichier;
             }
 
@@ -79,17 +78,14 @@ if ($dossier = opendir($name_main_folder)) {
             $html .= '<div class="bb-project-manager" data-title="'.mb_strtolower($title, 'UTF-8').'">';
             $html .= '<div class="bb-project-manager-content">';
             $html .= '<div class="bb-project-manager-content-img">';
-            $html .= '<a href="'.$urldev.'" data-href="'.$urldev.'"><img src="'.$picture.'" alt="Thumbnail" class="img-responsive"></a>';
+            $html .= '<a href="'.$url_app.'" data-href="'.$url_app.'"><img src="'.$picture.'" alt="Thumbnail" class="img-responsive"></a>';
             $html .= '</div>';
             $html .= '<div class="bb-project-manager-content-btn">';
             $html .= '<div class="bb-project-manager-content-alignCenter">';
             $html .= '<div class="bb-project-manager-content-body">';
-            $html .= '<a href="'.$urldev.'" class="btn btn-sm btn-primary" rel="nofollow" title="Developement"><span class="glyphicon glyphicon-wrench text-danger" aria-hidden="true"></span> Dev</a>';
-            if (!empty($urlprod)) {
-                $html .= '<a href="'.$urlprod.'" class="btn btn-sm btn-success" rel="nofollow" title="Production"><span class="glyphicon glyphicon-globe text-success" aria-hidden="true"></span> Prod</a>';
-            }
-            if (!empty($urldb)) {
-                $html .= '<a href="'.$urldb.'" class="btn btn-sm btn-default" rel="nofollow" target="_blank" title="Database"><span class="glyphicon glyphicon-record" aria-hidden="true"></span> DB</a>';
+            $html .= '<a href="'.$url_app.'" class="btn btn-sm btn-primary" rel="nofollow" title="Developement"><span class="glyphicon glyphicon-link" aria-hidden="true"></span> Link</a>';
+            if (!empty($url_db)) {
+                $html .= '<a href="'.$url_db.'" class="btn btn-sm btn-default" rel="nofollow" target="_blank" title="Database"><span class="glyphicon glyphicon-record" aria-hidden="true"></span> DB</a>';
             }
             $html .= '</div>';
             $html .= '</div>';
@@ -121,7 +117,7 @@ if ($dossier = opendir($name_main_folder)) {
 <html lang="<?php echo $locale; ?>">
     <head>
         <meta charset="UTF-8">
-        <title>Breith Barbot - Home projects</title>
+        <title>Projects homepage</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="robots" content="noindex, nofollow">
 
@@ -136,7 +132,7 @@ if ($dossier = opendir($name_main_folder)) {
             <div class="col-sm-12">
                 <header class="text-center">
                     <h1>
-                        <span class="highlight">Page</span> d'accueil des projets
+                        <span class="highlight">Projects</span> homepage
                     </h1>
                 </header>
                 <div>
@@ -146,6 +142,7 @@ if ($dossier = opendir($name_main_folder)) {
                             <ul>
                                 <li><img src="assets/img/favicon_php.ico" alt="phpinfo()" width="16" height="16"> <a target="_blank" href="?phpinfo">phpinfo()</a></li>
                                 <li><img src="assets/img/favicon_php.ico" alt="PHP" width="16" height="16"> <a title="PHP documentation" target="_blank" href="https://php.net/manual/<?php echo $locale; ?>/">PHP</a> : <strong><?php echo PHP_VERSION; ?></strong></li>
+                                <li><img src="assets/img/favicon_mysql.ico" alt="MySQL" width="16" height="16"> <a title="MySQL documentation" target="_blank" href="https://dev.mysql.com/doc/<?php echo $locale; ?>/">MySQL</a> : <strong><?php echo exec('mysql -V'); ?></strong></li>
 
                                 <?php
                                 // NGINX
@@ -166,10 +163,10 @@ if ($dossier = opendir($name_main_folder)) {
                     <hr/>
                     <div class="row">
                         <div class="col-md-3 col-md-offset-9">
-                            <input title="Rechercher un projet par son titre" class="form-control" placeholder="Rechercher un projet..." id="search" type="search" autocomplete="off" autofocus>
+                            <input title="Search a project by title" class="form-control" placeholder="Search a project..." id="search" type="search" autocomplete="off" autofocus>
                         </div>
                     </div>
-                    <p class="text-center" id="nbProjet">Il y a <strong><?php echo number_format($i); ?></strong> projet<?php echo ($i > 1) ? 's' : ''; ?></p>
+                    <p class="text-center" id="nbProjet">There are <strong><?php echo number_format($i); ?></strong> project<?php echo ($i > 1) ? 's' : ''; ?></p>
                     <br/>
                     <?php echo $html; ?>
                 </div>

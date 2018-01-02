@@ -1,9 +1,9 @@
-# Homepage web projects
-> Page d'accueil personnalisée listant tous vos projets web
+# Web projects homepage
+> Web projects homepage for XAMMP and more...
 
 <br>
 
-![Homepage web projects](.sources/homepage-web-projects.png "Homepage web projects")
+![Web projects homepage](.sources/demo-web-projects-homepage.gif "Web projects homepage")
 
 Ce projet utilise :
 * [Bootstrap](http://getbootstrap.com)
@@ -17,42 +17,41 @@ Ce projet utilise :
 
 1. `composer install`
 
-2. Placer toute la structure des fichiers/dossiers dans le répertoire `htdocs` (Remplacez-les si nécessaire).
+2. Place the whole structure of files/folders in the directory : `htdocs` (In the main folder of your server).
 
-3. Créer/Importer vos projets dans le dossier `/www`.
+3. Create/import your projects in the folder : `/projects`.
 
-4. Un fichier de configuration `/www/YOUR_PROJECT/.sources/config.ini` peut être construit pour chaque projet (FACULTATIF).
+4. [OPTIONAL] Create a configuration file : `/projects/project1/.sources/config.ini`.
+    - ```ini
+      ;Project     :  The project name
+      ;Created at  :  YYYY/MM/DD
+      ;Author      :  Author name
+      
+      [infos_base]
+      TITLE = 'The project name'
+      
+      DESCRIPTION = 'Project description...'
+      
+      URL_APP = 'http://dev.website.com'
+      
+      URL_DB = '/phpmyadmin/index.php?db=dbname'
+      
+      THUMBNAIL = 'http://dev.website.com/page2.php'
+      ```
 
-```ini
-;Project     :  The project name
-;Created at  :  YYYY/MM/DD
-;Author      :  Author name
-
-[infos_base]
-title = "The project name"
-
-description = "Project description..."
-
-URLDEV = "http://dev.website.com"
-
-URLPROD = "http://website.com"
-
-URLDB = "http://localhost/phpmyadmin/index.php?db=dbname"
-
-thumbnail = "http://website.com/about"
-```
-
-5. Pour ajouter une image personnalisée à chaque projet, il faut créer une image (en 400px x 250px) et la placer dans le dossier `/www/YOUR_PROJECT/.sources/` et la nommer `picture.jpg` au format **.jpg** (FACULTATIF).
+5. [OPTIONAL] To add a custom image to each project, you must create an image (400px x 250px) and place it in the folder `/projects/project1/.sources/` and name her `picture.jpg` at format **.jpg**.
 
 <br>
 
 ## Version
 
-Homepage web projects 2.1
-- New design
-- New features
-- Mobile compatibility / responsive
-- Thumbnail website
+- Homepage web projects 3.0.0
+    - Renamed folder
+    - Full doc in english
+    - Used single quotes instead
+    - Improve code
+    - Add robots.txt file
+    - ...
 
 <br>
  

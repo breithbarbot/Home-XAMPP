@@ -1,6 +1,6 @@
 {
-  "name": "breithbarbot/Project-manager-XAMPP-Web",
-  "description": "Page d'accueil listant tout vos projets XAMPP / Web",
+  "name": "breithbarbot/web-projects-homepage",
+  "description": "Web projects homepage for XAMMP and more...",
   "minimum-stability": "stable",
   "license": "proprietary",
   "authors": [

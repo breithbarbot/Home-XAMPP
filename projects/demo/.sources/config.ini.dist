@@ -4,16 +4,16 @@
 
 [infos_base]
 ;TITLE = 'The project name'
-TITLE = ''
+TITLE = 'Hello word!'
 
 ;DESCRIPTION = 'Project description...'
-DESCRIPTION = ''
+DESCRIPTION = 'Demo project'
 
 ;URLDEV = 'http://dev.website.com'
 URL_APP = ''
 
 ;URL_DB = 'http://localhost/phpmyadmin/index.php?db=dbname'
-URL_DB = ''
+URL_DB = '/phpmyadmin/index.php?db=demo'
 
 ;thumbnail = 'http://dev.website.com/page2.php'
 thumbnail = ''
