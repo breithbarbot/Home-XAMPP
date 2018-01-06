@@ -20,7 +20,7 @@ $(document).ready(function () {
         });
 
         // Test nb project
-        let nbProject = (i > 1) ? 'There are <strong>' + i + '</strong> projects' : 'There are <strong>' + i + '</strong> project';
+        let nbProject = (i > 1) ? 'There are <strong>' + i + '</strong> projects' : 'There is <strong>' + i + '</strong> project';
         $('#nbProject').html(nbProject);
     });
 
