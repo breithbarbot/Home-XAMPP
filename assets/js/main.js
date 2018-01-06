@@ -1,7 +1,7 @@
 /******************************************************************************
- * Copyright (c) 2016 Project-manager XAMPP / Web. All rights reserved.             *
+ * Copyright (c) 2018 Web projects homepage. All rights reserved.             *
  * Author      : Breith Barbot                                                *
- * Created on  : 16/10/16 16:31                                               *
+ * Updated at  : 07/01/18 00:02                                               *
  * File name   : main.js                                                      *
  * Description :                                                              *
  ******************************************************************************/
@@ -9,7 +9,7 @@
 $(document).ready(function () {
     // Search projects
     $('#search').on('keyup', function () {
-        var val = $(this).val().toLowerCase(), i = 0;
+        let val = $(this).val().toLowerCase(), i = 0;
         $('.bb-project-manager').each(function () {
             if ($(this).data('title').indexOf(val) !== -1) {
                 $(this).parent().show();
@@ -20,8 +20,8 @@ $(document).ready(function () {
         });
 
         // Test nb project
-        var nbProjet = (i > 1) ? 'Il y a <strong>' + i + '</strong> projets' : 'Il y a <strong>' + i + '</strong> projet';
-        $('#nbProjet').html(nbProjet);
+        let nbProject = (i > 1) ? 'There are <strong>' + i + '</strong> projects' : 'There are <strong>' + i + '</strong> project';
+        $('#nbProject').html(nbProject);
     });
 
     // Resize window
@@ -46,7 +46,6 @@ function is_touch_device() {
  * Change value attribute 'href'
  */
 function showHide_link() {
-
     // If 'touch screen' device
     if (is_touch_device()) {
         $('.bb-project-manager-content-img a').each(function () {
@@ -57,5 +56,4 @@ function showHide_link() {
             $(this).attr('href', $(this).data('href'));
         });
     }
-
 }

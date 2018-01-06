@@ -166,7 +166,7 @@ if ($dossier = opendir($name_main_folder)) {
                             <input title="Search a project by title" class="form-control" placeholder="Search a project..." id="search" type="search" autocomplete="off" autofocus>
                         </div>
                     </div>
-                    <p class="text-center" id="nbProjet">There are <strong><?php echo number_format($i); ?></strong> project<?php echo ($i > 1) ? 's' : ''; ?></p>
+                    <p class="text-center" id="nbProject">There are <strong><?php echo number_format($i); ?></strong> project<?php echo ($i > 1) ? 's' : ''; ?></p>
                     <br/>
                     <?php echo $html; ?>
                 </div>
