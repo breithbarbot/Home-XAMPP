@@ -22,6 +22,7 @@ Ce projet utilise :
 3. Create/import your projects in the folder : `/projects`.
 
 4. [OPTIONAL] Create a configuration file : `/projects/project1/.sources/config.ini`.
+
     - ```ini
       ;Project     :  The project name
       ;Created at  :  YYYY/MM/DD
