@@ -15,13 +15,16 @@ Ce projet utilise :
 
 ## Usage Instructions
 
-1. `composer install`
+1. Getting and install the project:
+   ```
+   git clone https://gitlab.com/breithbarbot/web-projects-homepage.git C:/xampp/htdocs
+   cd C:/xampp/htdocs/
+   composer install
+   ```
 
-2. Place the whole structure of files/folders in the directory : `htdocs` (In the main folder of your server).
+2. Create/import your projects in the folder : `projects`.
 
-3. Create/import your projects in the folder : `/projects`.
-
-4. [OPTIONAL] Create a configuration file : `/projects/project1/.sources/config.ini`.
+3. [OPTIONAL] Create a configuration file : `/projects/project1/.sources/config.ini`.
 
     ```ini
     ;Project     :  The project name
@@ -40,7 +43,7 @@ Ce projet utilise :
     THUMBNAIL = 'http://dev.website.com/page2.php'
     ```
 
-5. [OPTIONAL] To add a custom image to each project, you must create an image (400px x 250px) and place it in the folder `/projects/project1/.sources/` and name her `picture.jpg` at format **.jpg**.
+4. [OPTIONAL] To add a custom image to each project, you must create an image (400px x 250px) and place it in the folder `/projects/project1/.sources/` and name her `picture.jpg` at format **.jpg**.
 
 <br>
 
@@ -52,7 +55,7 @@ Ce projet utilise :
     - Used single quotes instead
     - Improve code
     - Add robots.txt file
-    - ...
+    - And more...
 
 <br>
  
