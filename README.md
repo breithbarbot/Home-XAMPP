@@ -24,7 +24,7 @@ Ce projet utilise :
 
 2. Create/import your projects in the folder : `projects`.
 
-3. [OPTIONAL] Create a configuration file : `/projects/project1/.sources/config.ini`.
+3. (OPTIONAL) Create a configuration file : `/projects/project1/.sources/config.ini`.
 
     ```ini
     ;Project     :  The project name
@@ -43,7 +43,7 @@ Ce projet utilise :
     THUMBNAIL = 'http://dev.website.com/page2.php'
     ```
 
-4. [OPTIONAL] To add a custom image to each project, you must create an image (400px x 250px) and place it in the folder `/projects/project1/.sources/` and name her `picture.jpg` at format **.jpg**.
+4. (OPTIONAL) To add a custom image to each project, you must create an image (400px x 250px) and place it in the folder `/projects/project1/.sources/` and name her `picture.jpg` at format **.jpg**.
 
 <br>
 
