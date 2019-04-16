@@ -10,6 +10,7 @@
     }
   ],
   "require": {
-    "microweber/screen": "^1.0"
+    "microweber/screen": "^1.0",
+    "ext-mbstring": "*"
   }
 }

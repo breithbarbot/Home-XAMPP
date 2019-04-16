@@ -22,6 +22,11 @@ if (isset($_GET['phpinfo'])) {
     exit();
 }
 
+/**
+ * @param $url
+ * @param $fileLocation
+ * @return mixed
+ */
 function generateThumbail($url, $fileLocation)
 {
     $screenCapture = new \Screen\Capture($url);
@@ -36,41 +41,40 @@ function generateThumbail($url, $fileLocation)
 }
 
 // Globales variables
-$name_main_folder = './projects/';
-$files_exclude = ['.', '..', 'index.php'];
-$link_phpMyAdmin = '/phpmyadmin';
+$nameMainFolder = './projects/';
+$filesExclude = ['.', '..', 'index.php'];
+$linkPhpMyAdmin = '/phpmyadmin';
 $locale = 'en';
 
 $html = '';
 $i = 0;
 
 // Listing of files
-if ($dossier = opendir($name_main_folder)) {
+if ($dossier = opendir($nameMainFolder)) {
     $html .= '<div class="row">';
     while (false !== ($fichier = readdir($dossier))) {
-        if (!in_array($fichier, $files_exclude, true) && is_dir($name_main_folder.$fichier)) {
-
+        if (!in_array($fichier, $filesExclude, true) && is_dir($nameMainFolder.$fichier)) {
 //            $html .= (!($i % 4)) ? '<div class="row">' : '';
 
-            $picture = is_file($name_main_folder.$fichier.'/.sources/picture.jpg') ? $name_main_folder.$fichier.'/.sources/picture.jpg' : 'assets/img/default.jpg';
-            $url_app = $description = $url_db = '';
+            $picture = is_file($nameMainFolder.$fichier.'/.sources/picture.jpg') ? $nameMainFolder.$fichier.'/.sources/picture.jpg' : 'assets/img/default.jpg';
+            $urlApp = $description = $urlDb = '';
 
-            if (is_file($name_main_folder.$fichier.'/.sources/config.ini')) {
-                $ini_array = parse_ini_file($name_main_folder.$fichier.'/.sources/config.ini', true);
-                $title = !empty($ini_array['infos_base']['TITLE']) ? $ini_array['infos_base']['TITLE'] : $fichier;
-                $description = !empty($ini_array['infos_base']['DESCRIPTION']) ? $ini_array['infos_base']['DESCRIPTION'] : '';
-                $url_app = !empty($ini_array['infos_base']['URL_APP']) ? $ini_array['infos_base']['URL_APP'] : $name_main_folder.$fichier;
-                $url_db = !empty($ini_array['infos_base']['URL_DB']) ? $ini_array['infos_base']['URL_DB'] : '';
+            if (is_file($nameMainFolder.$fichier.'/.sources/config.ini')) {
+                $iniArray = parse_ini_file($nameMainFolder.$fichier.'/.sources/config.ini', true);
+                $title = !empty($iniArray['infos_base']['TITLE']) ? $iniArray['infos_base']['TITLE'] : $fichier;
+                $description = !empty($iniArray['infos_base']['DESCRIPTION']) ? $iniArray['infos_base']['DESCRIPTION'] : '';
+                $urlApp = !empty($iniArray['infos_base']['URL_APP']) ? $iniArray['infos_base']['URL_APP'] : $nameMainFolder.$fichier;
+                $urlDb = !empty($iniArray['infos_base']['URL_DB']) ? $iniArray['infos_base']['URL_DB'] : '';
                 // Thumbnail
-                if (isset($ini_array['infos_base']['thumbnail']) && !is_file($name_main_folder.$fichier.'/.sources/picture.jpg')) {
-                    if (!empty($ini_array['infos_base']['thumbnail']) && @get_headers($ini_array['infos_base']['thumbnail'], 1)) {
-                        $picture = generateThumbail($ini_array['infos_base']['thumbnail'], $name_main_folder.$fichier.'/.sources/picture.jpg');
+                if (isset($iniArray['infos_base']['thumbnail']) && !is_file($nameMainFolder.$fichier.'/.sources/picture.jpg')) {
+                    if (!empty($iniArray['infos_base']['thumbnail']) && @get_headers($iniArray['infos_base']['thumbnail'], 1)) {
+                        $picture = generateThumbail($iniArray['infos_base']['thumbnail'], $nameMainFolder.$fichier.'/.sources/picture.jpg');
                     } else {
-                        $picture = generateThumbail($url_app, $name_main_folder.$fichier.'/.sources/picture.jpg');
+                        $picture = generateThumbail($urlApp, $nameMainFolder.$fichier.'/.sources/picture.jpg');
                     }
                 }
             } else {
-                $url_app = $name_main_folder.$fichier;
+                $urlApp = $nameMainFolder.$fichier;
                 $title = $fichier;
             }
 
@@ -78,14 +82,14 @@ if ($dossier = opendir($name_main_folder)) {
             $html .= '<div class="bb-project-manager" data-title="'.mb_strtolower($title, 'UTF-8').'">';
             $html .= '<div class="bb-project-manager-content">';
             $html .= '<div class="bb-project-manager-content-img">';
-            $html .= '<a href="'.$url_app.'" data-href="'.$url_app.'"><img src="'.$picture.'" alt="Thumbnail" class="img-responsive"></a>';
+            $html .= '<a href="'.$urlApp.'" data-href="'.$urlApp.'"><img src="'.$picture.'" alt="Thumbnail" class="img-responsive"></a>';
             $html .= '</div>';
             $html .= '<div class="bb-project-manager-content-btn">';
             $html .= '<div class="bb-project-manager-content-alignCenter">';
             $html .= '<div class="bb-project-manager-content-body">';
-            $html .= '<a href="'.$url_app.'" class="btn btn-sm btn-primary" rel="nofollow" title="Developement"><span class="glyphicon glyphicon-link" aria-hidden="true"></span> Link</a>';
-            if (!empty($url_db)) {
-                $html .= '<a href="'.$url_db.'" class="btn btn-sm btn-default" rel="nofollow" target="_blank" title="Database"><span class="glyphicon glyphicon-record" aria-hidden="true"></span> DB</a>';
+            $html .= '<a href="'.$urlApp.'" class="btn btn-sm btn-primary" rel="nofollow" title="Developement"><span class="glyphicon glyphicon-link" aria-hidden="true"></span> Link</a>';
+            if (!empty($urlDb)) {
+                $html .= '<a href="'.$urlDb.'" class="btn btn-sm btn-default" rel="nofollow" target="_blank" title="Database"><span class="glyphicon glyphicon-record" aria-hidden="true"></span> DB</a>';
             }
             $html .= '</div>';
             $html .= '</div>';
@@ -105,7 +109,7 @@ if ($dossier = opendir($name_main_folder)) {
 
 //            $html .= (!(($i + 1) % 4)) ? '</div>' : '';
 
-            $i++;
+            ++$i;
         }
     }
     $html .= '</div>';
@@ -146,17 +150,17 @@ if ($dossier = opendir($name_main_folder)) {
 
                                 <?php
                                 // NGINX
-                                if (strpos($_SERVER['SERVER_SOFTWARE'], 'nginx/') !== false) {
+                                if (false !== strpos($_SERVER['SERVER_SOFTWARE'], 'nginx/')) {
                                     echo '<li><img src="assets/img/favicon_nginx.ico" alt="Nginx" width="16" height="16"> <a title="NGINX Wiki’s documentation" target="_blank" href="https://www.nginx.com/resources/wiki/">Nginx</a> : <strong>'.$_SERVER['SERVER_SOFTWARE'].'</strong></li>';
                                 }
 
                                 // APACHE
-                                if (strpos($_SERVER['SERVER_SOFTWARE'], 'Apache/') !== false) {
+                                if (false !== strpos($_SERVER['SERVER_SOFTWARE'], 'Apache/')) {
                                     echo '<li><img src="assets/img/favicon_apache.ico" alt="Apache" width="16" height="16"> <a title="Apache documentation" target="_blank" href="http://httpd.apache.org/docs/2.4/">Apache</a> : <strong>'.$_SERVER['SERVER_SOFTWARE'].'</strong></li>';
                                 }
                                 ?>
 
-                                <li><img src="assets/img/favicon_phpmyadmin.ico" alt="phpMyAdmin" width="16" height="16"> <a target="_blank" href="<?php echo $link_phpMyAdmin; ?>">phpMyAdmin</a></li>
+                                <li><img src="assets/img/favicon_phpmyadmin.ico" alt="phpMyAdmin" width="16" height="16"> <a target="_blank" href="<?php echo $linkPhpMyAdmin; ?>">phpMyAdmin</a></li>
                             </ul>
                         </div>
                     </div>

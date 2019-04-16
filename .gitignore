@@ -36,3 +36,4 @@ Thumbs.db
 
 # Custom #
 ##########
+.php_cs.cache
