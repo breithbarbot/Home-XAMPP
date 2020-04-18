@@ -1,5 +1,5 @@
 # Web projects homepage
-> A simple web server for windows with Nginx, PHP, MariaDB/PostgreSQL and phpMyAdmin
+> A simple web server for windows with Apache/Nginx, PHP, MariaDB and phpMyAdmin
 
 <br>
 
