@@ -1,6 +1,5 @@
 # Web projects homepage
-
-> Web projects homepage for XAMPP and more...
+> A simple web server for windows with Nginx, PHP, MariaDB/PostgreSQL and phpMyAdmin
 
 <br>
 
@@ -15,18 +14,14 @@ Ce projet utilise :
 <br>
 
 ## Usage Instructions
-
 1. Getting and install the project:
    ```
    git clone https://gitlab.com/breithbarbot/web-projects-homepage.git C:/xampp/htdocs
    cd C:/xampp/htdocs/
    composer install
    ```
-
-2. Create/import your projects in the folder : `projects`.
-
-3. (OPTIONAL) Create a configuration file : `/projects/project1/.sources/config.ini`.
-
+1. Create/import your projects in the folder : `projects`.
+1. (OPTIONAL) Create a configuration file : `/projects/project1/.sources/config.ini`.
     ```ini
     ;Project     :  The project name
     ;Created at  :  YYYY/MM/DD
@@ -43,14 +38,12 @@ Ce projet utilise :
     
     THUMBNAIL = 'http://dev.website.com/page2.php'
     ```
-
-4. (OPTIONAL) To add a custom image to each project, you must create an image (400px x 250px) and place it in the folder `/projects/project1/.sources/` and name her `picture.jpg` at format **.jpg**.
+1. (OPTIONAL) To add a custom image to each project, you must create an image (400px x 250px) and place it in the folder `/projects/project1/.sources/` and name her `picture.jpg` at format **.jpg**.
 
 <br>
 
 ## Version
-
-- Homepage web projects 3.0.0
+- v3.0.0
     - Renamed folder
     - Full doc in english
     - Used single quotes instead
@@ -61,5 +54,4 @@ Ce projet utilise :
 <br>
  
 ## License
-
 [MIT License](LICENSE)
