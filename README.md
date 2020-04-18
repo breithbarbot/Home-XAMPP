@@ -1,5 +1,5 @@
 # Web projects homepage
-> A simple web server for windows with Apache/Nginx, PHP, MariaDB and phpMyAdmin
+> Web projects homepage for XAMPP and more...
 
 <br>
 
